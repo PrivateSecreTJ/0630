@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c36">
+  <title>替我選一下｜決定輪盤</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-icon">✦</span>
+        <div>
+          <p class="eyebrow">DECISION WHEEL</p>
+          <h1>替我選一下</h1>
+        </div>
+      </div>
+      <span class="local-badge">
+        <span class="status-dot"></span>
+        本地使用
+      </span>
+    </header>
+
+    <main>
+      <div class="intro">
+        <h2>把猶豫交給輪盤。</h2>
+        <p>吃什麼、去哪裡、先做哪件事？填好選項，讓輪盤替你決定。</p>
+      </div>
+
+      <div class="workspace">
+        <!-- 選項輸入 -->
+        <section class="panel editor-panel">
+          <div class="panel-heading">
+            <h3><span>01</span> 我的選項</h3>
+            <span id="option-count" class="count">0 個</span>
+          </div>
+
+          <label for="options">每行一個選項，也可以用逗號分隔</label>
+          <textarea
+            id="options"
+            rows="7"
+            placeholder="吃拉麵(40%)&#10;吃火鍋&#10;吃咖哩"
+            spellcheck="false"
+          ></textarea>
+
+          <div class="help-box">
+            <span class="help-icon">%</span>
+            <div>
+              <strong>想偏心一點也可以</strong>
+              <p>
+                在選項後填 <code>(40%)</code>；
+                未填機率的選項，平均分配剩餘百分比。
+              </p>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="save-options" class="button secondary" type="button">
+              儲存選項
+            </button>
+            <button id="sample-options" class="button ghost" type="button">
+              帶入範例
+            </button>
+          </div>
+
+          <p id="storage-status" class="storage-status" role="status"></p>
+
+          <div class="divider"></div>
+
+          <div class="panel-heading">
+            <h3><span>02</span> 機率分配</h3>
+            <span class="small-label">起始機率</span>
+          </div>
+
+          <p id="validation-message" class="validation-message" role="status"></p>
+          <div id="probability-list" class="probability-list"></div>
+        </section>
+
+        <!-- 輪盤 -->
+        <section class="panel wheel-panel">
+          <div class="panel-heading">
+            <h3><span>03</span> 交給運氣</h3>
+            <span class="small-label">LET IT SPIN</span>
+          </div>
+
+          <div class="wheel-stage">
+            <div class="wheel-pointer" aria-hidden="true"></div>
+            <canvas
+              id="wheel"
+              width="800"
+              height="800"
+              role="img"
+              aria-label="選擇輪盤，區塊大小對應各選項機率"
+            ></canvas>
+            <div class="wheel-center" aria-hidden="true">✦</div>
+          </div>
+
+          <div id="result" class="result-box" role="status" aria-live="polite">
+            <span class="result-label">今天的決定</span>
+            <strong id="result-name">準備好，轉一下！</strong>
+            <span id="result-detail">讓輪盤幫你選擇。</span>
+          </div>
+
+          <button id="spin" class="button spin-button" type="button">
+            <span>✦</span>
+            <span id="spin-label">幫我決定</span>
+          </button>
+
+          <p id="spin-message" class="spin-message" role="status" aria-live="polite"></p>
+          <p class="wheel-note">
+            每次都依目前設定重新抽取，相同選項可能再次出現。
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <span>LESS HESITATION. MORE ACTION.</span>
+      <span>選項自動儲存在目前瀏覽器</span>
+    </footer>
+  </div>
+</body>
+</html>
